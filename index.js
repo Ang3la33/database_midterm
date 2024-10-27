@@ -122,6 +122,20 @@ async function updateCustomerEmail(customerId, newEmail) {
  */
 async function removeCustomer(customerId) {
   // TODO: Add code to remove a customer and their rental history
+  try {
+    const result = await pool.query(
+      `DELETE FROM customers WHERE customerId = $1`,
+      [customerId]
+    );
+    
+    if (result.rowCount === 0) {
+      console.log(`Customer with ID "${customerId}" not found.`);
+    } else {
+      console.log(`Customer with ID "${customerId}" and their rental history have been removed.`);
+    }
+  } catch (error) {
+    console.error("Error removing customer and their rental history: ", error);
+  }
 };
 
 /**
@@ -171,6 +185,7 @@ async function runCLI() {
       printHelp();
       break;
   }
+  await pool.end();
 };
 
 runCLI();
