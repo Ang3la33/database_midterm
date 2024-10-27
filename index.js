@@ -14,6 +14,45 @@ const pool = new Pool({
  */
 async function createTable() {
   // TODO: Add code to create Movies, Customers, and Rentals tables
+  try {
+
+    // Movies table
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS movies (
+        id SERIAL PRIMARY KEY,
+        title TEXT NOT NULL,
+        year INTEGER,
+        genre TEXT,
+        director TEXT
+      );
+    `);
+
+    // Customers table
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS customers (
+        customerId SERIAL PRIMARY KEY,
+        firstName TEXT,
+        lastName TEXT,
+        email TEXT,
+        phoneNum TEXT
+      );
+    `);
+
+    // Rentals table with foreign key references to Movies and Customers
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS rentals (
+        id SERIAL PRIMARY KEY,
+        movie_id INTEGER REFERENCES movies(id) ON DELETE CASCADE,
+        customer_id INTEGER REFERENCES customers(customerId) ON DELETE CASCADE,
+        rental_date DATE NOT NULL DEFAULT CURRENT_DATE,
+        return_date DATE
+      );
+    `);
+
+    console.log("Table(s) created successfully.");
+  } catch (error) {
+    console.error("Error creating tables: ", error);
+  }
 };
 
 /**
