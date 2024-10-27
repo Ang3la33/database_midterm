@@ -99,6 +99,20 @@ async function displayMovies() {
  */
 async function updateCustomerEmail(customerId, newEmail) {
   // TODO: Add code to update a customer's email address
+  try {
+    const result = await pool.query(
+      `UPDATE customers SET email = $1 WHERE customerId = $2`,
+      [newEmail, customerId]
+    );
+
+    if (result.rowCount === 0) {
+      console.log(`Customer with ID "${customerId}" not found.`);
+    } else {
+      console.log(`Customer email updated successfully to "${newEmail}".`);
+    }
+  } catch (error) {
+    console.error("Error updating customer's email: ", error);
+  }
 };
 
 /**
