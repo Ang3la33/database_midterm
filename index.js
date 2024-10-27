@@ -83,6 +83,12 @@ async function insertMovie(title, year, genre, director) {
  */
 async function displayMovies() {
   // TODO: Add code to retrieve and print all movies from the Movies table
+  try {
+    const result = await pool.query("SELECT * FROM movies");
+    result.rows.forEach((row) => console.log(row));
+  } catch (error) {
+    console.error("Error displaying movies: ", error);
+  }
 };
 
 /**
