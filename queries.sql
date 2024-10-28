@@ -92,4 +92,8 @@ JOIN customers ON rentals.customer_id = customers.customerId
 JOIN movies ON rentals.movie_id = movies.id
 WHERE movies.director = 'Quintin Tarentino'; -- Finds customers that rented Quintin Tarentino's movie 'Pulp Fiction' and date rented
 
-
+-- 5. List all currently rented out movies (movies who's return dates haven't been met)
+SELECT movies.title
+FROM rentals
+JOIN movies ON rentals.movie_id = movies.id
+WHERE rentals.return_date IS NULL -- Lists all movies with a return date of 'NULL' (not returned)
