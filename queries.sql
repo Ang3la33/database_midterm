@@ -83,3 +83,13 @@ FROM rentals
 JOIN movies ON rentals.movie_id = movies.id
 WHERE movies.title = 'The Godfather'; -- Finds the rental history of 'The Godfather'
 
+-- 4. For a specific movie director: Find the name of the customer,
+-- the date of the rental and the title of the movie, each time a 
+-- movie by that director was rented
+SELECT customers.firstName || ' ' || customers.lastName AS fullName, rentals.rental_date, movies.title
+FROM rentals
+JOIN customers ON rentals.customer_id = customers.customerId
+JOIN movies ON rentals.movie_id = movies.id
+WHERE movies.director = 'Quintin Tarentino'; -- Finds customers that rented Quintin Tarentino's movie 'Pulp Fiction' and date rented
+
+
