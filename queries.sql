@@ -64,8 +64,15 @@ VALUES
 
 
 -- 1. Find all movies rented by a specific customer, given their email
-SELECT movies.title FROM rentals 
+SELECT movies.title 
+FROM rentals 
 JOIN customers ON rentals.customer_id = customers.customerId
 JOIN movies ON rentals.movie_id = movies.id
 WHERE customers.email = 'jenny@example.com'; -- Finds all movies rented by Jenny
 
+-- 2. Given a movie title, list all customers who have rented the movie
+SELECT customers.firstName || ' ' || customers.lastName AS fullName 
+FROM rentals
+JOIN customers ON rentals.customer_id = customers.customerId
+JOIN movies ON rentals.movie_id = movies.id
+WHERE movies.title = 'The Godfather'; -- Finds all customers that rented 'The Godfather'
