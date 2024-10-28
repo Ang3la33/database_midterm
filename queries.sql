@@ -63,3 +63,9 @@ VALUES
     (5, 1, '2024-10-16', NULL); -- Jenny rented Braveheart, has not returned
 
 
+-- 1. Find all movies rented by a specific customer, given their email
+SELECT movies.title FROM rentals 
+JOIN customers ON rentals.customer_id = customers.customerId
+JOIN movies ON rentals.movie_id = movies.id
+WHERE customers.email = 'jenny@example.com'; -- Finds all movies rented by Jenny
+
