@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS rentals (
     id SERIAL PRIMARY KEY,
     movie_id INTEGER REFERENCES movies(id) ON DELETE CASCADE,
     customer_id INTEGER REFERENCES customers(customerId) ON DELETE CASCADE,
-    rental_date DATE NOT NULL DEFAULT CURRENT_DATE,
+    rental_date DATE NOT NULL,
     return_date DATE
 );
 
