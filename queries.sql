@@ -76,3 +76,10 @@ FROM rentals
 JOIN customers ON rentals.customer_id = customers.customerId
 JOIN movies ON rentals.movie_id = movies.id
 WHERE movies.title = 'The Godfather'; -- Finds all customers that rented 'The Godfather'
+
+-- 3. Get the rental history for a specific movie title
+SELECT rentals.rental_date, rentals.return_date 
+FROM rentals
+JOIN movies ON rentals.movie_id = movies.id
+WHERE movies.title = 'The Godfather'; -- Finds the rental history of 'The Godfather'
+
